@@ -1,0 +1,99 @@
+{% extends 'cms/base_cms.html' %}
+
+{% block content %}
+    <!-- Page Content -->
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row">
+            	<div class="col-12 pb-0">
+            		<span class="text-muted">Dashboard</span>
+            		<p class="h3 text-gray-dark">Blog Overview</p>
+            	</div>
+            </div>
+            <br>
+            <div class="row">
+            	<div class="col-3 mb-4">
+            		<div class="card shadow border-primary text-center">
+            			<div class="card-body align-self-center">
+            				<span class="text-uppercase text-muted">Posts</span>
+            				<p class="h3 text-gray align-self-center">{{ posted_count }}</p>
+            			</div>
+            		</div>
+            	</div>
+            	<div class="col-3 mb-4">
+            		<div class="card shadow border-success text-center">
+            			<div class="card-body align-self-center">
+            				<span class="text-uppercase text-muted">Comments</span>
+            				<p class="h3 text-gray text-center">{{ comments_count }}</p>
+            			</div>
+            		</div>
+            	</div>
+            	<div class="col-3 mb-4">
+            		<div class="card shadow border-warning text-center">
+            			<div class="card-body">
+            				<span class="text-uppercase text-muted">Likes</span>
+            				<p class="h3 text-gray text-center">13501</p>
+            			</div>
+            		</div>
+            	</div>
+            	<div class="col-3 mb-4">
+            		<div class="card shadow border-danger text-center">
+            			<div class="card-body">
+            				<span class="text-uppercase text-muted align-self-center">Users</span>
+            				<p class="h3 text-gray align-self-center text-center">1</p>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+            <div class="row">
+            	<div class="col-8 mb-4">
+            		<div class="card shadow border-secondary">
+            			<div class="card-body align-self-start container">
+            				<h3 class="card-title ml-4">Last Post</h3>
+            				<br>
+            				<div class="row ml-1 mr-1">
+            					{% for post in last_posts_3 %}
+            						<div class="col-6 mb-3">
+            							<div class="card shadow border-0">
+            								<div class="card-body">
+            									<a href="{% url 'post_detail_cms' pk=post.pk %}" title=""><h4 class="card-title align-self-center">{{ post.title }}</h4></a>
+            									<p class="text-justify text-gray-dark align-self-center">{{ post.published_date }}</p>
+            								</div>
+            							</div>
+            						</div>
+            					{% endfor %}
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            	<div class="col-4">
+            		<div class="card shadow border-dark" style="height: auto;">
+            			<div class="card-body">
+            				<h3 class="card-title mb-4">Comments to approve</h3>
+            				{% for comment in comments_to_approve %}
+            				<div class="row">
+            					<div class="col-4">
+            						<h5 class="ml-3">{{ comment.author }}</h5>
+            					</div>
+            					<div class="col-8">
+            						<p class="">Post: {{ comment.post }}</p>
+            					</div>	
+            				</div>
+            				<div class="row mb-2">
+            					<div class="col-9">
+            						<p class="ml-3 text-dark text-truncate">{{ comment.text }}</p>
+            					</div>
+            					<div class="col-3">
+            						<a type="button" class="btn btn-success btn-sm" href="{% url 'comment_approve' pk=comment.pk %}">Approve</a>
+            					</div>	
+            				</div>
+            				{% empty %}
+            					<p class="h5">No comments to approve</p>
+            				{% endfor %}
+            			</div>
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

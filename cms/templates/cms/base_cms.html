@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Panel</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+</head>
+<body style="font-family: Ubuntu, cursive;">
+
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="shadow-lg">
+        <div class="sidebar-header">
+            <h3>Blog Dashboard</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li {% with url_name=request.resolver_match.url_name %}{% if url_name == 'index_cms' %}class="active"{% endif %}{% endwith %}>
+                <a href="{% url 'index_cms' %}">Inicio</a>
+            </li>
+            <li {% with url_name=request.resolver_match.url_name %}{% if url_name == 'post_list' %}class="active"{% elif url_name == 'post_detail_cms' %}class="active"{% endif %}{% endwith %}>
+            	<a href="{% url 'post_list' %}">Posts</a>
+            </li>
+            <li {% with url_name=request.resolver_match.url_name %}{% if url_name == 'add_post' %}class="active"{% endif %}{% endwith %}>
+                <a href="{% url 'add_post' %}">Agregar post</a>
+            </li>
+        </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

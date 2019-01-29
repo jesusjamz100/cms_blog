@@ -1,0 +1,69 @@
+{% extends 'cms/base_cms.html' %}
+
+{% block content %}
+	<!-- Page Content -->
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row">
+            	<div class="col-12 pb-0">
+            		<span class="text-muted">Dashboard</span>
+            		<p class="h3 text-gray-dark">Post list</p>
+            	</div>
+            </div>
+            <br>
+            <div class="row">
+            	<div class="col-6">
+            		<h4 class="ml-3 mb-4">Posted</h4>
+            		{% for post in post_list %}
+            			<div class="col-12 mb-4">
+            				<div class="card truncate shadow" style="max-height: 250px;">
+  								<div class="card-body">
+    								<a href="{% url 'post_detail_cms' pk=post.pk %}" title=""><h5 class="card-title">{{ post.title }}</h5></a>
+									<a href="{% url 'post_remove' pk=post.pk %}" type="button" class="close btn btn-danger" aria-label="Close">
+  										<span aria-hidden="true">&times;</span>
+									</a>
+    								<p class="card-text text-justify">{{ post.text }}</p>
+    								<div class="row">
+										<div class="col-6">
+											<p class="text-muted">{{ post.published_date }}</p>
+										</div>
+										<div class="col-6">
+											<span class="badge badge-pill badge-info">{{ post.tag }}</span>
+										</div>
+									</div>
+  								</div>
+							</div>
+            			</div>
+            		{% endfor %}
+            	</div>
+            	<div class="col-6">
+            		<h4 class="ml-3 mb-4">Drafts</h4>
+            		{% for post in drafts %}
+            			<div class="col-12 mb-4">
+            				<div class="card truncate shadow" style="max-height: 250px;">
+  								<div class="card-body">
+    								<a href="{% url 'post_detail_cms' pk=post.pk %}" title=""><h5 class="card-title">{{ post.title }}</h5></a>
+    								<a href="{% url 'post_remove' pk=post.pk %}" type="button" class="close btn btn-danger" aria-label="Close">
+  										<span aria-hidden="true">&times;</span>
+									</a>
+    								<p class="card-text text-justify">{{ post.text }}</p>
+    								<div class="row">
+										<div class="col-4">
+											<p class="text-muted">Created: {{ post.created_date|date:'d-m-Y' }}</p>
+										</div>
+										<div class="col-4">
+											<span class="badge badge-pill badge-info">{{ post.tag }}</span>
+										</div>
+										<div class="col-4">
+											<a class="btn btn-primary" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+										</div>
+									</div>
+  								</div>
+							</div>
+            			</div>
+            		{% endfor %}
+            	</div>
+        	</div>
+        </div>
+    </div>
+{% endblock %}

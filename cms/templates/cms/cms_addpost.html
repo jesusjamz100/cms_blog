@@ -1,0 +1,29 @@
+{% extends 'cms/base_cms.html' %}
+
+{% block content %}
+<!-- Page Content -->
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row">
+            	<div class="col-12 pb-0">
+            		<span class="text-muted">Dashboard</span>
+            		<p class="h3 text-gray-dark">Add post</p>
+            	</div>
+            </div>
+            <br>
+            <div class="row">
+            	<div class="col-12">
+            		<div class="card">
+            			<div class="card-body">
+            				<form method="POST" class="post-form">
+            					{% csrf_token %}
+        						{{ form.as_p }}
+        						<button type="submit" class="save btn btn-primary">Save</button>
+    						</form>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
