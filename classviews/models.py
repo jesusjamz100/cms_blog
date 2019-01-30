@@ -5,4 +5,5 @@ class Contact(models.Model):
 	email = models.EmailField()
 	address = models.CharField(max_length=100)
 	phone = models.CharField(max_length=50)
+
 	
