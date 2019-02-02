@@ -3,4 +3,5 @@
 {% csrf_token %}
 Are you sure you want to delete this contact?
 <input  type="submit"  value="Submit"  />
+<a href="{% url 'classview:contact_list' %}" title="">Volver a la lista</a>
 </form>
